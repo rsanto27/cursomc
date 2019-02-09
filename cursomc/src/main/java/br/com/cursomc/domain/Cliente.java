@@ -1,45 +1,52 @@
 package br.com.cursomc.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import br.com.cursomc.domain.enums.TipoCliente;
 
-public class Cliente {
+@Entity
+public class Cliente implements Serializable{
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
-	private String cprOuCnpj;
+	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	
+	@ElementCollection
+	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<String>();
 	
-	public Cliente(Integer id, String nome, String email, String cprOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.cprOuCnpj = cprOuCnpj;
+		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = tipo.getCod();
 	}
 
 	public Cliente() {
 		super();
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -65,12 +72,12 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public String getCprOuCnpj() {
-		return cprOuCnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setCprOuCnpj(String cprOuCnpj) {
-		this.cprOuCnpj = cprOuCnpj;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public TipoCliente getTipo() {
@@ -112,6 +119,14 @@ public class Cliente {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 	
 }
