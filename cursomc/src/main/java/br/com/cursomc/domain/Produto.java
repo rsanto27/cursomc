@@ -2,7 +2,9 @@ package br.com.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +30,8 @@ public class Produto implements Serializable{
 	@ManyToMany
 	@JoinTable(name="PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name="categoria_id"))
 	private List<Categoria> categorias = new ArrayList<Categoria>();
+	
+	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
 	public Produto() {
 		

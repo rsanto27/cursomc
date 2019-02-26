@@ -2,6 +2,8 @@ package br.com.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,6 +33,8 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
+	
+	private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 	
 	public Pedido() {
 		super();
