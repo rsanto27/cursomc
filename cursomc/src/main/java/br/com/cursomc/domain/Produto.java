@@ -68,6 +68,14 @@ public class Produto implements Serializable{
 		this.nome = nome;
 		this.preco = preco;
 	}
+	
+	public List<Pedido> getPedidos(){
+		List<Pedido> lista = new ArrayList<Pedido>();
+		itens.forEach(item -> {
+			lista.add(item.getPedido());
+		});
+		return lista;
+	}
 
 	public Integer getId() {
 		return id;
@@ -99,6 +107,14 @@ public class Produto implements Serializable{
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 }
