@@ -16,5 +16,10 @@ public class CategoriaService {
 	public Categoria buscar(Integer id) {
 		return catRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada @id= " + id));
 	}
+
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return catRepository.save(obj);
+	}
 	
 }
