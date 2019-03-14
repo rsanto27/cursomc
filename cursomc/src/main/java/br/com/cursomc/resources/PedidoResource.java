@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cursomc.domain.Categoria;
 import br.com.cursomc.domain.Pedido;
-import br.com.cursomc.services.CategoriaService;
 import br.com.cursomc.services.PedidoService;
 
 @RestController
@@ -21,8 +19,8 @@ public class PedidoResource {
 	private PedidoService pedidoService;
 
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
-		Pedido pedido = pedidoService.buscar(id);
+	public ResponseEntity<Pedido> listar(@PathVariable Integer id) {
+		Pedido pedido = pedidoService.find(id);
 		return ResponseEntity.ok(pedido);
 	}
 }
