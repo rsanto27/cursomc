@@ -60,6 +60,10 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
+	
+	public double getSubTotal() {
+		return (this.preco - this.desconto) * this.quantidade;
+	}
 
 	public Produto getProduto() {
 		return id.getProduto();
