@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,9 @@ public class ClienteService {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Integer id) {
 		return clienteRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrada @id= " + id));
@@ -76,7 +80,7 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteNewDTO objDto) {
 		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), 
-				TipoCliente.toEnum(objDto.getTipo()), null);
+				TipoCliente.toEnum(objDto.getTipo()), pe.encode(objDto.getSenha()));
 		Cidade cid = cidadeRepository.findById(objDto.getCidadeId()).get();
 		Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), 
 				objDto.getComplemento(), objDto.getBairro(), objDto.getCep(), cli, cid);
