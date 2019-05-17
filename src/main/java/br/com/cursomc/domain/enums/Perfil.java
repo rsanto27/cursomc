@@ -1,7 +1,7 @@
 package br.com.cursomc.domain.enums;
 
 public enum Perfil {
-	
+	//é premissa do spring que o sufixo de cada permissao tenha a palavra ROLE
 	ADMIN(1, "ROLE_ADMIN"),
 	CLIENTE(2, "ROLE_CLIENTE");
 	

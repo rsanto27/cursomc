@@ -17,6 +17,7 @@ import br.com.cursomc.domain.enums.EstadoPagamento;
 import br.com.cursomc.repositories.ItemPedidoRepository;
 import br.com.cursomc.repositories.PagamentoRepository;
 import br.com.cursomc.repositories.PedidoRepository;
+import br.com.cursomc.security.UserSS;
 import br.com.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -76,8 +77,10 @@ public class PedidoService {
 	 * public Page<Pedido> findPage(Integer page, Integer linesPerPage, String
 	 * orderBy, String direction) {
 	 * 
+	 * 
 	 * UserSS user = UserService.authenticated(); if (user == null) { throw new
 	 * AuthorizationException("Acesso negado"); }
+	 * 
 	 * 
 	 * PageRequest pageRequest = PageRequest.of(page, linesPerPage,
 	 * Direction.valueOf(direction), orderBy); Cliente cliente =
